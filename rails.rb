@@ -18,7 +18,8 @@ def hello_world(language)
     end
 end
 
-hello_world("de")
+
+
 
 # 2a. Create a method called assign_grade that takes a number as an argument and returns the corresponding letter grade. Test your code with THREE method calls. Expected output for assign_grade 96: 'A', assign_grade 75: 'C'
 def assign_grade(num)
@@ -38,6 +39,31 @@ def assign_grade(num)
 end
 
 assign_grade(75)
+
+controller.spec:
+context 'grade' do
+    it "should responde with an A" do
+        get :grade, params: {score:90}
+        result = JSON.parse(response.body)
+        expect(result["grade"]).to eq("A")
+    end
+    
+    it "should responde with an A" do
+        get :grade, params: {score:90}
+        result = JSON.parse(response.body)
+        expect(result["grade"]).to eq("A")
+    end
+end
+
+controller
+def grade
+    if params[:score].to_i >= 90
+        grade = "A"
+    else 
+        grade = "C"
+    render json: {grade: grade}
+end
+
 
 
 # 2b. STRETCH: Create exceptions to your method if the number passed is less than 0 or greater than 100. Copy and paste the original code below to add the exceptions.
